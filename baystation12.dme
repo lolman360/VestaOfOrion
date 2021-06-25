@@ -3201,7 +3201,6 @@
 #include "modular_vesta\code\modules\research\designs\mecha_equipment.dm"
 #include "modular_vesta\code\modules\research\designs\medical.dm"
 #include "modular_vesta\code\modules\research\designs\mining.dm"
-#include "modular_vesta\code\modules\research\designs\prosthesis_implants.dm"
 #include "modular_vesta\code\modules\research\designs\rigmodules.dm"
 #include "modular_vesta\code\modules\research\designs\robot_parts.dm"
 #include "modular_vesta\code\modules\research\designs\stock_parts.dm"

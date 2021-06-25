@@ -1,5 +1,5 @@
 //Ripley ====================================
-
+/*
 /datum/design/research/item/mechfab/ripley
 	category = "Ripley"
 	starts_unlocked = TRUE
@@ -162,3 +162,5 @@
 /datum/design/research/circuit/mecha/targeting
 	build_path = /obj/item/circuitboard/mecha/targeting
 	sort_string = "NAAA�"
+
+*/

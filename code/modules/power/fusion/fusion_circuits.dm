@@ -73,6 +73,7 @@
 							/obj/item/stock_parts/micro_laser/ultra = 2
 							)
 
+/*
 /datum/design/circuit/fusion
 	name = "fusion core control console"
 	id = "fusion_core_control"
@@ -122,3 +123,4 @@
 	id = "gyrotron"
 	build_path = /obj/item/stock_parts/circuitboard/gyrotron
 	sort_string = "LAAAK"
+	*/
