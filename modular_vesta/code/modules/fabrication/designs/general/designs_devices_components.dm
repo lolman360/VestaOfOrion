@@ -1,6 +1,6 @@
-/datum/fabricator_recipe/device_component
+/datum/design/autolathe/consolescreen
+	name = "console screen"
 	build_path = /obj/item/stock_parts/console_screen
-	category = "Devices and Components"
 
 /datum/design/autolathe/keyboard
 	build_path = /obj/item/stock_parts/keyboard

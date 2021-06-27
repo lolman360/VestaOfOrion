@@ -23,7 +23,19 @@
 	allow_quick_empty = 1
 	use_to_pickup = 1
 
-
+/obj/item/storage/ore/holding
+	name = "mining satchel"
+	desc = "This sturdy bag can be used to store and transport ores."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "satchel"
+	slot_flags = SLOT_BELT
+	max_storage_space = 200
+	max_w_class = ITEM_SIZE_NORMAL
+	w_class = ITEM_SIZE_LARGE
+	can_hold = list(/obj/item/ore)
+	allow_quick_gather = 1
+	allow_quick_empty = 1
+	use_to_pickup = 1
 // -----------------------------
 //          Evidence bag
 // -----------------------------

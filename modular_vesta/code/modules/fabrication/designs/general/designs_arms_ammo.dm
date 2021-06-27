@@ -13,9 +13,9 @@
 	name = "flare gun"
 	build_path = /obj/item/gun/projectile/flare
 
-/datum/design/autolathe
+/datum/design/autolathe/machete
 	build_path = /obj/item/material/hatchet/machete/steel
-	hidden = TRUE
+
 
 /datum/design/autolathe/shotgun
 	name = "ammunition (shotgun, beanbag)"

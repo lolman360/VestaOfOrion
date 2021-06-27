@@ -17,13 +17,14 @@
 	var/list/chemicals = list()		//List of reagents. Format: "id" = amount.
 	var/adjust_materials = TRUE		//Whether material efficiency applies to this design
 	var/build_path = null			//The path of the object that gets created.
-	var/build_type = NONE			//Flag as to what kind machine the design is built in. See defines.
+	var/build_type			//Flag as to what kind machine the design is built in. See defines.
 	var/category = null 			//Primarily used for Mech Fabricators, but can be used for anything.
 	var/time = 0					//How many ticks it requires to build. If 0, calculated from the amount of materials used.
 	var/starts_unlocked = FALSE		//If the design starts unlocked.
 
 	var/list/ui_data = null			//Pre-generated UI data, to be sent into NanoUI/TGUI interfaces.
-
+	var/ignore_materials = list(
+		/material/waste = TRUE)
 	// An MPC file containing this design. You can use it directly, but only if it doesn't interact with the rest of MPC system. If it does, use copies.
 	var/datum/computer_file/binary/design/file
 
@@ -76,14 +77,14 @@
 
 //Add materials and reagents from object to the recipe
 /datum/design/proc/AddObjectMaterials(obj/O)
-	if(length(O).matter))
+	if(length(O).matter)
 		for(var/material in O.matter)
 			var/material/M = SSmaterials.get_material_by_name(material)
 			if(istype(M) && !ignore_materials[M.type])
-				resources[M.type] = O.matter[material]
+				materials[M.type] = O.matter[material]
 	if(O.reagents && length(O.reagents.reagent_list))
-		for(var/datum/reagent/R in I.reagents.reagent_list)
-			resources[R.type] = R.volume
+		for(var/datum/reagent/R in O.reagents.reagent_list)
+			chemicals[R.type] = R.volume
 	qdel(I)
 
 
@@ -164,4 +165,27 @@
 
 /datum/design/autolathe/corrupted
 	name = "ERROR"
-	build_path = /obj/item/weapon/material/shard/shrapnel/scrap
+	build_path = /obj/item/material/shard/shrapnel/scrap
+
+/datum/design/research     //Datum for object designs, used in construction
+
+/datum/design/research/item
+	build_type = PROTOLATHE
+	category = "Misc" //No more unsorted things
+
+/datum/design/research/item/mechfab
+	build_type = MECHFAB
+
+/datum/design/research/item/clothing
+	category = CAT_CLOTHING
+
+/datum/design/research/item/tool
+	category = CAT_TOOLS
+
+/datum/design/research/item/part
+	build_type = PROTOLATHE
+	category = CAT_STOCKPARTS
+
+/datum/design/research/item/part/AssembleDesignDesc()
+	if(!desc)
+		desc = "A stock part used in the construction of various devices."
