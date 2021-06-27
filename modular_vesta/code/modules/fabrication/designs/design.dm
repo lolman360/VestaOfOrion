@@ -14,7 +14,7 @@
 	var/sort_string = "ZZZZZ"		//Sorting order
 
 	var/list/materials = list()		//List of materials. Format: "id" = amount.
-	var/list/chemicals = list()		//List of reagents. Format: "id" = amount.
+	var/list/chemicals = list()		//List of reagents. Format: reagentpath = amount.
 	var/adjust_materials = TRUE		//Whether material efficiency applies to this design
 	var/build_path = null			//The path of the object that gets created.
 	var/build_type			//Flag as to what kind machine the design is built in. See defines.
@@ -85,8 +85,6 @@
 	if(O.reagents && length(O.reagents.reagent_list))
 		for(var/datum/reagent/R in O.reagents.reagent_list)
 			chemicals[R.type] = R.volume
-	qdel(I)
-
 
 //Calculate design time from the amount of materials and chemicals used.
 /datum/design/proc/AssembleDesignTime()
@@ -122,7 +120,7 @@
 		var/list/RS = list()
 
 		for(var/material in materials)
-			var/material/material_datum = get_material_by_name(material)
+			var/material/material_datum = SSmaterials.get_material_by_name(material)
 			if(material_datum)
 				RS.Add(list(list("id" = material, "name" = material_datum.display_name, "req" = materials[material])))
 
@@ -131,10 +129,8 @@
 	if(length(chemicals))
 		var/list/RS = list()
 
-		for(var/reagent in chemicals)
-			var/datum/reagent/reagent_datum = chemical_reagents_list[reagent]
-			if(reagent_datum)
-				RS.Add(list(list("id" = reagent, "name" = reagent_datum.name, "req" = chemicals[reagent])))
+		for(var/datum/reagent/reagent in chemicals)
+			RS.Add(list(list("id" = reagent, "name" = reagent.name, "req" = chemicals[reagent])))
 
 		ui_data["chemicals"] = RS
 
@@ -165,7 +161,7 @@
 
 /datum/design/autolathe/corrupted
 	name = "ERROR"
-	build_path = /obj/item/material/shard/shrapnel/scrap
+	build_path = /obj/item/weapon/material/shard/shrapnel/scrap
 
 /datum/design/research     //Datum for object designs, used in construction
 
