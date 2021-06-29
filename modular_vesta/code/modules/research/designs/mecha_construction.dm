@@ -1,166 +1,104 @@
-//Ripley ====================================
-/*
-/datum/design/research/item/mechfab/ripley
-	category = "Ripley"
-	starts_unlocked = TRUE
 
-/datum/design/research/item/mechfab/ripley/chassis
-	build_path = /obj/item/mecha_parts/chassis/ripley
+/datum/design/item/mechfab/exosuit
+	name = "exosuit frame"
+	build_path = /obj/structure/heavy_vehicle_frame
+	category = "Exosuits"
 
-/datum/design/research/item/mechfab/ripley/chassis/firefighter
-	build_path = /obj/item/mecha_parts/chassis/ripley/firefighter
+/datum/design/item/mechfab/exosuit/basic_armour
+	name = "basic exosuit armour"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit
 
-/datum/design/research/item/mechfab/ripley/torso
-	build_path = /obj/item/mecha_parts/part/ripley_torso
-
-/datum/design/research/item/mechfab/ripley/left_arm
-	build_path = /obj/item/mecha_parts/part/ripley_left_arm
-
-/datum/design/research/item/mechfab/ripley/right_arm
-	build_path = /obj/item/mecha_parts/part/ripley_right_arm
-
-/datum/design/research/item/mechfab/ripley/left_leg
-	build_path = /obj/item/mecha_parts/part/ripley_left_leg
-
-/datum/design/research/item/mechfab/ripley/right_leg
-	build_path = /obj/item/mecha_parts/part/ripley_right_leg
+/datum/design/item/mechfab/exosuit/radproof_armour
+	name = "radiation-proof exosuit armour"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit/radproof
 
 
-//Odysseus =====================================================
+/datum/design/item/mechfab/exosuit/em_armour
+	name = "EM-shielded exosuit armour"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit/em
 
-/datum/design/research/item/mechfab/odysseus
-	category = "Odysseus"
 
-/datum/design/research/item/mechfab/odysseus/chassis
-	build_path = /obj/item/mecha_parts/chassis/odysseus
+/datum/design/item/mechfab/exosuit/combat_armour
+	name = "Combat exosuit armour"
+	build_path = /obj/item/robot_parts/robot_component/armour/exosuit/combat
 
-/datum/design/research/item/mechfab/odysseus/torso
-	build_path = /obj/item/mecha_parts/part/odysseus_torso
 
-/datum/design/research/item/mechfab/odysseus/head
-	build_path = /obj/item/mecha_parts/part/odysseus_head
 
-/datum/design/research/item/mechfab/odysseus/left_arm
-	build_path = /obj/item/mecha_parts/part/odysseus_left_arm
+/datum/design/item/mechfab/exosuit/control_module
+	name = "exosuit control module"
+	build_path = /obj/item/mech_component/control_module
 
-/datum/design/research/item/mechfab/odysseus/right_arm
-	build_path = /obj/item/mecha_parts/part/odysseus_right_arm
+/datum/design/item/mechfab/exosuit/combat_torso
+	name = "combat exosuit chassis"
 
-/datum/design/research/item/mechfab/odysseus/left_leg
-	build_path = /obj/item/mecha_parts/part/odysseus_left_leg
+	build_path = /obj/item/mech_component/chassis/combat
 
-/datum/design/research/item/mechfab/odysseus/right_leg
-	build_path = /obj/item/mecha_parts/part/odysseus_right_leg
+/datum/design/item/mechfab/exosuit/combat_arms
+	name = "combat exosuit manipulators"
+	build_path = /obj/item/mech_component/manipulators/combat
 
-//Gygax =========================================
+/datum/design/item/mechfab/exosuit/combat_legs
+	name = "combat exosuit motivators"
+	build_path = /obj/item/mech_component/propulsion/combat
 
-/datum/design/research/item/mechfab/gygax
-	category = "Gygax"
+/datum/design/item/mechfab/exosuit/powerloader_head
+	name = "power loader sensors"
+	build_path = /obj/item/mech_component/sensors/powerloader
 
-/datum/design/research/item/mechfab/gygax/chassis
-	build_path = /obj/item/mecha_parts/chassis/gygax
+/datum/design/item/mechfab/exosuit/powerloader_torso
+	name = "power loader chassis"
+	build_path = /obj/item/mech_component/chassis/powerloader
 
-/datum/design/research/item/mechfab/gygax/torso
-	build_path = /obj/item/mecha_parts/part/gygax_torso
 
-/datum/design/research/item/mechfab/gygax/head
-	build_path = /obj/item/mecha_parts/part/gygax_head
+/datum/design/item/mechfab/exosuit/powerloader_arms
+	name = "power loader manipulators"
+	build_path = /obj/item/mech_component/manipulators/powerloader
 
-/datum/design/research/item/mechfab/gygax/left_arm
-	build_path = /obj/item/mecha_parts/part/gygax_left_arm
+/datum/design/item/mechfab/exosuit/powerloader_legs
+	name = "power loader motivators"
+	build_path = /obj/item/mech_component/propulsion/powerloader
 
-/datum/design/research/item/mechfab/gygax/right_arm
-	build_path = /obj/item/mecha_parts/part/gygax_right_arm
+/datum/design/item/mechfab/exosuit/light_head
+	name = "light exosuit sensors"
+	build_path = /obj/item/mech_component/sensors/light
 
-/datum/design/research/item/mechfab/gygax/left_leg
-	build_path = /obj/item/mecha_parts/part/gygax_left_leg
+/datum/design/item/mechfab/exosuit/light_torso
+	name = "light exosuit chassis"
+	build_path = /obj/item/mech_component/chassis/light
 
-/datum/design/research/item/mechfab/gygax/right_leg
-	build_path = /obj/item/mecha_parts/part/gygax_right_leg
+/datum/design/item/mechfab/exosuit/light_arms
+	name = "light exosuit manipulators"
+	build_path = /obj/item/mech_component/manipulators/light
 
-/datum/design/research/item/mechfab/gygax/armour
-	build_path = /obj/item/mecha_parts/part/gygax_armour
+/datum/design/item/mechfab/exosuit/light_legs
+	name = "light exosuit motivators"
+	build_path = /obj/item/mech_component/propulsion/light
 
-//Durand ======================================================================
+/datum/design/item/mechfab/exosuit/heavy_head
+	name = "heavy exosuit sensors"
+	build_path = /obj/item/mech_component/sensors/heavy
 
-/datum/design/research/item/mechfab/durand
-	category = "Durand"
+/datum/design/item/mechfab/exosuit/heavy_torso
+	name = "heavy exosuit chassis"
+	build_path = /obj/item/mech_component/chassis/heavy
 
-/datum/design/research/item/mechfab/durand/chassis
-	build_path = /obj/item/mecha_parts/chassis/durand
+/datum/design/item/mechfab/exosuit/heavy_arms
+	name = "heavy exosuit manipulators"
+	build_path = /obj/item/mech_component/manipulators/heavy
 
-/datum/design/research/item/mechfab/durand/torso
-	build_path = /obj/item/mecha_parts/part/durand_torso
+/datum/design/item/mechfab/exosuit/heavy_legs
+	name = "heavy exosuit motivators"
+	build_path = /obj/item/mech_component/propulsion/heavy
 
-/datum/design/research/item/mechfab/durand/head
-	build_path = /obj/item/mecha_parts/part/durand_head
+/datum/design/item/mechfab/exosuit/spider
+	name = "quadruped motivators"
+	build_path = /obj/item/mech_component/propulsion/spider
 
-/datum/design/research/item/mechfab/durand/left_arm
-	build_path = /obj/item/mecha_parts/part/durand_left_arm
+/datum/design/item/mechfab/exosuit/track
+	name = "armored treads"
+	build_path = /obj/item/mech_component/propulsion/tracks
 
-/datum/design/research/item/mechfab/durand/right_arm
-	build_path = /obj/item/mecha_parts/part/durand_right_arm
 
-/datum/design/research/item/mechfab/durand/left_leg
-	build_path = /obj/item/mecha_parts/part/durand_left_leg
-
-/datum/design/research/item/mechfab/durand/right_leg
-	build_path = /obj/item/mecha_parts/part/durand_right_leg
-
-/datum/design/research/item/mechfab/durand/armour
-	build_path = /obj/item/mecha_parts/part/durand_armour
-
-//Phazon ======================================================================
-
-/datum/design/research/item/mechfab/phazon
-	category = "Phazon"
-
-/datum/design/research/item/mechfab/phazon/chassis
-	build_path = /obj/item/mecha_parts/chassis/phazon
-
-/datum/design/research/item/mechfab/phazon/torso
-	build_path = /obj/item/mecha_parts/part/phazon_torso
-
-/datum/design/research/item/mechfab/phazon/head
-	build_path = /obj/item/mecha_parts/part/phazon_head
-
-/datum/design/research/item/mechfab/phazon/left_arm
-	build_path = /obj/item/mecha_parts/part/phazon_left_arm
-
-/datum/design/research/item/mechfab/phazon/right_arm
-	build_path = /obj/item/mecha_parts/part/phazon_right_arm
-
-/datum/design/research/item/mechfab/phazon/left_leg
-	build_path = /obj/item/mecha_parts/part/phazon_left_leg
-
-/datum/design/research/item/mechfab/phazon/right_leg
-	build_path = /obj/item/mecha_parts/part/phazon_right_leg
-
-/datum/design/research/item/mechfab/phazon/armour
-	build_path = /obj/item/mecha_parts/part/phazon_armor
-
-///////////////////////////////////
-////////////Mecha Circuits/////////
-///////////////////////////////////
-
-/datum/design/research/circuit/mecha
-	name_category = ""
-	category = CAT_MECHA
-
-/datum/design/research/circuit/mecha/AssembleDesignDesc()
-	if(!desc)
-		desc = "Allows for the construction of \a [item_name]."
-
-/datum/design/research/circuit/mecha/main
-	build_path = /obj/item/circuitboard/mecha/main
-	sort_string = "NAAAA"
-
-/datum/design/research/circuit/mecha/peripherals
-	build_path = /obj/item/circuitboard/mecha/peripherals
-	sort_string = "NAAAB"
-
-/datum/design/research/circuit/mecha/targeting
-	build_path = /obj/item/circuitboard/mecha/targeting
-	sort_string = "NAAA�"
-
-*/
+/datum/design/item/mechfab/exosuit/sphere_torso
+	name = "spherical chassis"
+	build_path = /obj/item/mech_component/chassis/pod
