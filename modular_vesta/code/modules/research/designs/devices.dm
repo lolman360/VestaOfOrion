@@ -5,10 +5,6 @@
 	name = "welding mask"
 	build_path = /obj/item/clothing/head/welding
 
-/datum/design/research/item/tool/combat_shovel
-	name = "combat shovel"
-	build_path = /obj/item/tool/shovel/combat
-
 /datum/design/research/item/tool/rcd
 	name = "rapid construction device"
 	build_path = /obj/item/rcd
@@ -16,10 +12,6 @@
 /datum/design/research/item/tool/rcd_ammo
 	name = "matter cartridge"
 	build_path = /obj/item/rcd_ammo
-
-/datum/design/research/item/tool/pneumatic_crowbar
-	name = "pneumatic crowbar"
-	build_path = /obj/item/tool/crowbar/pneumatic
 
 /datum/design/research/item/light_replacer
 	name = "light replacer"
@@ -52,7 +44,7 @@
 /datum/design/research/item/beacon_locator
 	name = "Beacon Locator"
 	desc = "Used to scan and locate signals on a particular frequency according."
-	build_path = /obj/item/device/beacon_locator
+	build_path = /obj/item/pinpointer/radio
 	category = "Bluespace Telecoms"
 
 /datum/design/research/item/gps

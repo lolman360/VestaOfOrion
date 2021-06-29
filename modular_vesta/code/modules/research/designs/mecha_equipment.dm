@@ -1,9 +1,3 @@
-/datum/design/research/item/mecha_tracking
-	name = "Exosuit tracking beacon"
-	build_type = AUTOLATHE | MECHFAB
-	build_path = /obj/item/mecha_parts/mecha_tracking
-	category = CAT_MECHA
-	starts_unlocked = TRUE
 
 /datum/design/research/item/mecha
 	build_type = AUTOLATHE | MECHFAB
@@ -15,33 +9,23 @@
 
 /datum/design/research/item/mecha/hydraulic_clamp
 	name = "Hydraulic clamp"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
+	build_path = /obj/item/mech_equipment/clamp
 
 /datum/design/research/item/mecha/drill
 	name = "Drill"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill
+	build_path = /obj/item/mech_equipment/drill
 
 /datum/design/research/item/mecha/extinguisher
 	name = "Extinguisher"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/extinguisher
+	build_path = /obj/item/mech_equipment/extinguisher
 
 /datum/design/research/item/mecha/cable_layer
 	name = "Cable layer"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/cable_layer
-
-/datum/design/research/item/mecha/flaregun
-	name = "Flare launcher"
-	build_path = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flare
+	build_path = /obj/item/mech_equipment/cable_layer
 
 /datum/design/research/item/mecha/sleeper
 	name = "Sleeper"
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/sleeper
-
-/datum/design/research/item/mecha/syringe_gun
-	name = "Syringe gun"
-	desc = "Exosuit-mounted syringe gun and chemical synthesizer."
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun
-
+	build_path = /obj/item/mech_equipment/sleeper
 
 /datum/design/research/item/mecha/passenger
 	name = "Passenger compartment"

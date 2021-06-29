@@ -17,12 +17,6 @@
 	name = "Roller Bed"
 	desc = "A foldable roller bed that can be carried around."
 	build_path = /obj/item/roller
-
-/datum/design/research/item/medical/compact_roller_bed
-	name = "Compact Roller bed"
-	desc = "A more costly but durable and compact version of the roller bed."
-	build_path = /obj/item/roller/compact
-
 //Scanners
 
 /datum/design/research/item/medical/autopsy_scanner

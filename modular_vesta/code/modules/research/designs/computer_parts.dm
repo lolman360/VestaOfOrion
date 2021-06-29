@@ -5,17 +5,17 @@
 
 // Data disks
 /datum/design/research/item/computer_part/portabledrive/basic
-	build_path = /obj/item/computer_hardware/hard_drive/portable/basic
+	build_path = /obj/item/stock_parts/computer/hard_drive/portable
 	sort_string = "GAAAA"
 	starts_unlocked = TRUE
 
-/datum/design/research/item/computer_part/portabledrive/normal
-	build_path = /obj/item/computer_hardware/hard_drive/portable
+/datum/design/research/item/computer_part/portabledrive/advanced
+	build_path = /obj/item/stock_parts/computer/hard_drive/portable/advanced
 	sort_string = "GAAAB"
 	starts_unlocked = TRUE
 
-/datum/design/research/item/computer_part/portabledrive/advanced
-	build_path = /obj/item/computer_hardware/hard_drive/portable/advanced
+/datum/design/research/item/computer_part/portabledrive/super
+	build_path = /obj/item/stock_parts/computer/hard_drive/portable/super
 	sort_string = "GAAAC"
 
 

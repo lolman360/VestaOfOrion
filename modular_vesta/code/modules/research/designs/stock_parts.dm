@@ -64,10 +64,6 @@
 	name = "Phasic Scanning Module"
 	build_path = /obj/item/stock_parts/scanning_module/phasic
 
-/datum/design/research/item/part/rocket
-	name = "Rocket Engine"
-	build_path = /obj/item/rocket_engine
-
 // Telecomm parts
 /datum/design/research/item/part/subspace_ansible
 	name = "Subspace Ansible"

@@ -161,7 +161,7 @@
 
 /datum/design/autolathe/corrupted
 	name = "ERROR"
-	build_path = /obj/item/weapon/material/shard/shrapnel/scrap
+	build_path = /obj/item/material/shard/shrapnel
 
 /datum/design/research     //Datum for object designs, used in construction
 

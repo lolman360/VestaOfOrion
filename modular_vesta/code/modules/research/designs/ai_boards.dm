@@ -7,7 +7,7 @@
 //AI hand held stuff
 /datum/design/research/item/paicard
 	name = "'pAI', personal artificial intelligence device"
-	build_path = /obj/item/paicard
+	build_path = /obj/item/device/paicard
 	category = "Misc"
 
 /datum/design/research/item/intellicard

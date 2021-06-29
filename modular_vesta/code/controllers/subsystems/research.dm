@@ -8,7 +8,7 @@
 SUBSYSTEM_DEF(research)
 	name = "Research"
 	flags = SS_NO_FIRE
-	init_order = INIT_ORDER_DEFAULT
+	init_order = SS_INIT_DEFAULT
 
 	var/list/all_designs = list()	// All design datums
 	var/list/starting_designs = list() // List of designs starts_unlocked = TRUE
@@ -53,7 +53,7 @@ SUBSYSTEM_DEF(research)
 		else
 			WARNING("Unknown tech_type '[tech.tech_type]' in technology '[tech.name]'")
 
-	generate_integrated_circuit_designs()
+
 
 	research_initialized = TRUE
 	for(var/i in research_files_to_init)
@@ -65,20 +65,6 @@ SUBSYSTEM_DEF(research)
 
 	return ..()
 
-
-/datum/controller/subsystem/research/proc/generate_integrated_circuit_designs()
-	for(var/obj/item/integrated_circuit/IC in all_integrated_circuits)
-		if(!(IC.spawn_flags & IC_SPAWN_RESEARCH))
-			continue
-		var/datum/design/design = new /datum/design/research/circuit(src)
-		design.name = "Custom circuitry \[[IC.category_text]\] ([IC.name])"
-		design.id = "ic-[lowertext(IC.name)]"
-		design.build_path = IC.type
-
-		design.AssembleDesignInfo()
-
-
-		all_designs += design
 
 /datum/controller/subsystem/research/proc/initialize_design_file(datum/computer_file/binary/design/design_file)
 	// If designs are already generated, initialized right away.
