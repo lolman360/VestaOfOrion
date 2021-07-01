@@ -27,20 +27,9 @@
 	build_path = /obj/item/stock_parts/circuitboard/arcade/orion_trail
 	category = CAT_MISC
 
-/datum/design/research/circuit/secdata
-	name = "security records console"
-	build_path = /obj/item/stock_parts/circuitboard/secure_data
-	sort_string = "DABAA"
-	category = CAT_COMP
-
 /datum/design/research/circuit/prisonmanage
 	name = "prisoner management console"
 	build_path = /obj/item/stock_parts/circuitboard/prisoner
-	category = CAT_COMP
-
-/datum/design/research/circuit/med_data
-	name = "medical records console"
-	build_path = /obj/item/stock_parts/circuitboard/med_data
 	category = CAT_COMP
 
 /datum/design/research/circuit/operating
@@ -58,29 +47,9 @@
 	build_path = /obj/item/stock_parts/circuitboard/sleeper
 	category = CAT_MEDI
 
-/datum/design/research/circuit/clonepod
-	name = "clone pod"
-	build_path = /obj/item/stock_parts/circuitboard/clonepod
-	category = CAT_MEDI
-
-/datum/design/research/circuit/clonescanner
-	name = "cloning scanner"
-	build_path = /obj/item/stock_parts/circuitboard/clonescanner
-	category = CAT_MEDI
-
-/datum/design/research/circuit/chemmaster
-	name = "ChemMaster 3000"
-	build_path = /obj/item/stock_parts/circuitboard/chemmaster
-	category = CAT_MEDI
-
 /datum/design/research/circuit/chem_heater
 	name = "Chemical Heater"
-	build_path = /obj/item/stock_parts/circuitboard/chem_heater
-	category = CAT_MEDI
-
-/datum/design/research/circuit/chemical_dispenser
-	name = "Chemical Dispenser"
-	build_path = /obj/item/stock_parts/circuitboard/chemical_dispenser
+	build_path = /obj/item/stock_parts/circuitboard/reagent_heater
 	category = CAT_MEDI
 
 /datum/design/research/circuit/teleconsole

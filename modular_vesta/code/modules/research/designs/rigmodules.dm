@@ -2,18 +2,6 @@
 /obj/item/rig_module/chem_dispenser
 /obj/item/rig_module/autodoc*/
 
-/datum/design/research/item/autodoc
-	name = "trial autodoc module"
-	desc = "A complex surgery system for almost all your needs."
-	build_path = /obj/item/rig_module/autodoc
-	category = "Medical"
-
-/datum/design/research/item/autodoc_commercial
-	name = "commercial autodoc module"
-	desc = "A complex surgery system for almost all your needs."
-	build_path = /obj/item/rig_module/autodoc/commercial
-	category = "Medical"
-
 /datum/design/research/item/chem_dispenser
 	name = "mounted chemical dispenser"
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
@@ -84,13 +72,7 @@
 	materials = list(MATERIAL_STEEL = 25, MATERIAL_PLASTIC = 25, MATERIAL_GLASS = 45)
 	category = CAT_WEAPON
 
-//MISC and odds and sods for hardsuits/rigs
-
-/datum/design/research/item/storage
-	name = "hardsuit integrated storage"
-	desc = "A storage case that has been integrated into a hardsuit."
-	build_path = /obj/item/rig_module/storage
-	materials = list(MATERIAL_STEEL = 45, MATERIAL_PLASTIC = 25)
+//MISC
 
 /datum/design/research/item/ai_container
 	name = "hardsuit integrated AI container"

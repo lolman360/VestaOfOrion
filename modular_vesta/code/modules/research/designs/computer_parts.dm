@@ -100,17 +100,9 @@
 	build_path = /obj/item/stock_parts/computer/processor_unit/small
 
 
-/datum/design/research/item/computer_part/cpu/adv
-	build_path = /obj/item/stock_parts/computer/processor_unit/photonic
-	sort_string = "VBAAX"
-
-/datum/design/research/item/computer_part/cpu/adv/small
-	build_path = /obj/item/stock_parts/computer/processor_unit/photonic/small
-
-
 /datum/design/research/item/computer_part/cpu/super
-	build_path = /obj/item/computer_hardware/processor_unit/super
+	build_path = /obj/item/stock_parts/computer/processor_unit/photonic
 	sort_string = "VBAAY"
 
 /datum/design/research/item/computer_part/cpu/super/small
-	build_path = /obj/item/computer_hardware/processor_unit/super/small
+	build_path = /obj/item/stock_parts/computer/processor_unit/photonic/small

@@ -30,7 +30,6 @@
 
 /datum/design/item/mechfab/exosuit/combat_torso
 	name = "combat exosuit chassis"
-
 	build_path = /obj/item/mech_component/chassis/combat
 
 /datum/design/item/mechfab/exosuit/combat_arms

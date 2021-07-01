@@ -234,7 +234,7 @@
 	required_tech_levels = list()
 	cost = 1000
 
-	unlocks_designs = list(	/datum/design/research/item/tool/pneumatic_crowbar,
+	unlocks_designs = list(
 							/datum/design/research/item/tool/rcd,
 							/datum/design/research/item/tool/rcd_ammo,
 							/datum/design/research/item/tool/combat_shovel
@@ -504,5 +504,3 @@
 
 	unlocks_designs = list("quadultra_micro_laser", "bluespace_matter_bin")
 */
-
-

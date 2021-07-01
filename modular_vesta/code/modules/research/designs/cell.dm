@@ -8,7 +8,7 @@
 		desc = "Allows the construction of [initial(C.autorecharging) ? "microreactor" : "power"] cells that can hold [initial(C.maxcharge)] units of energy."
 
 /datum/design/research/item/powercell/high
-	name = "High-Capacity Power Cell""
+	name = "High-Capacity Power Cell"
 	build_type = PROTOLATHE | MECHFAB
 	build_path = /obj/item/cell/high
 

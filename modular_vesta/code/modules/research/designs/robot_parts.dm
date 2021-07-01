@@ -3,37 +3,45 @@
 	build_type = AUTOLATHE | MECHFAB
 	starts_unlocked = TRUE
 
-/datum/design/research/item/mechfab/robot/exoskeleton
-	name = "Robot exoskeleton"
+/datum/design/item/mechfab/robot/exoskeleton_ground
+	name = "Robot frame, standard"
 	build_path = /obj/item/robot_parts/robot_suit
 
-/datum/design/research/item/mechfab/robot/torso
+
+/datum/design/item/mechfab/robot/exoskeleton_flying
+	name = "Robot frame, hover"
+	build_path = /obj/item/robot_parts/robot_suit/flyer
+
+
+/datum/design/item/mechfab/robot/torso
 	name = "Robot torso"
 	build_path = /obj/item/robot_parts/chest
 
-/datum/design/research/item/mechfab/robot/head
+
+/datum/design/item/mechfab/robot/head
 	name = "Robot head"
 	build_path = /obj/item/robot_parts/head
 
-/datum/design/research/item/mechfab/robot/l_arm
+
+/datum/design/item/mechfab/robot/l_arm
 	name = "Robot left arm"
 	build_path = /obj/item/robot_parts/l_arm
 
-/datum/design/research/item/mechfab/robot/r_arm
+
+/datum/design/item/mechfab/robot/r_arm
 	name = "Robot right arm"
 	build_path = /obj/item/robot_parts/r_arm
 
-/datum/design/research/item/mechfab/robot/l_leg
+
+/datum/design/item/mechfab/robot/l_leg
 	name = "Robot left leg"
 	build_path = /obj/item/robot_parts/l_leg
 
-/datum/design/research/item/mechfab/robot/r_leg
+
+/datum/design/item/mechfab/robot/r_leg
 	name = "Robot right leg"
 	build_path = /obj/item/robot_parts/r_leg
 
-/datum/design/research/circuit/roomba_board
-	name = "Roomba control board"
-	build_path = /obj/item/roomba_part/control
 
 /datum/design/research/item/mechfab/robot/component
 	name_category = "robot component"
@@ -65,85 +73,48 @@
 	build_path = /obj/item/robot_parts/robot_component/armour
 
 
-
+/datum/design/research/item/mechfab/robot/upgrade
+	name_category = "robot upgrade"
+	category = CAT_ROBOT
+	starts_unlocked = FALSE
 
 
 // Robot updates
-/datum/design/research/item/robot_upgrade
-	build_type = AUTOLATHE | MECHFAB
-	category = CAT_ROBOT
-	name_category = "robot upgrade"
-
-/datum/design/research/item/robot_upgrade/rename
-	name = "Rename module"
-	desc = "Used to rename a cyborg."
-	build_path = /obj/item/borg/upgrade/rename
-	starts_unlocked = TRUE
-
-/datum/design/research/item/robot_upgrade/reset
+/datum/design/research/item/mechfab/robot/upgrade/reset
 	name = "Reset module"
-	desc = "Used to reset a cyborg's module. Destroys any other upgrades applied to the robot."
 	build_path = /obj/item/borg/upgrade/reset
 	starts_unlocked = TRUE
 
-/datum/design/research/item/robot_upgrade/floodlight
+/datum/design/research/item/mechfab/robot/upgrade/floodlight
 	name = "Floodlight module"
-	desc = "Used to boost cyborg's integrated light intensity."
 	build_path = /obj/item/borg/upgrade/floodlight
 	starts_unlocked = TRUE
 
-/datum/design/research/item/robot_upgrade/restart
+/datum/design/research/item/mechfab/robot/upgrade/restart
 	name = "Emergency restart module"
-	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."
 	build_path = /obj/item/borg/upgrade/restart
 	starts_unlocked = TRUE
 
-/datum/design/research/item/robot_upgrade/vtec
+/datum/design/research/item/mechfab/robot/upgrade/vtec
 	name = "VTEC module"
-	desc = "Used to kick in a robot's VTEC systems, increasing their speed."
 	build_path = /obj/item/borg/upgrade/vtec
 
-/datum/design/research/item/robot_upgrade/power_saver
-	name = "Power Saver module"
-	desc = "Used to kick in a robot's Power Saver systems, increasing their power efficiency."
-	build_path = /obj/item/borg/upgrade/power_saver
+/datum/design/research/item/mechfab/robot/upgrade/weaponcooler
+	name = "Rapid weapon cooling module"
+	build_path = /obj/item/borg/upgrade/weaponcooler
 
-/datum/design/research/item/robot_upgrade/tasercooler
-	name = "Rapid taser cooling module"
-	desc = "Used to cool a mounted taser, increasing the potential current in it and thus its recharge rate."
-	build_path = /obj/item/borg/upgrade/tasercooler
+/datum/design/research/item/mechfab/robot/upgrade/jetpack
+	name = "Jetpack module"
+	build_path = /obj/item/borg/upgrade/jetpack
 
-/datum/design/research/item/robot_upgrade/rcd
+/datum/design/research/item/mechfab/robot/upgrade/rcd
 	name = "RCD module"
-	desc = "A rapid construction device module for use during construction operations."
 	build_path = /obj/item/borg/upgrade/rcd
 
-/datum/design/research/item/robot_upgrade/arc_welder
-	name = "Integrated Arc Welder module"
-	desc = "An electric based, safe welder for a robotic unit."
-	build_path = /obj/item/borg/upgrade/arc_welder
-
-/datum/design/research/item/robot_upgrade/medical_hypo_upgrade
-	name = "Expanded Medical Hypo Upgrade"
-	desc = "A smarter hypo synthesizer to make more complex chemicals. Made for medical modules."
-	build_path = /obj/item/borg/upgrade/hypospray/medical
-
-/datum/design/research/item/robot_upgrade/rescue_hypo_upgrade
-	name = "Expanded Rescue Hypo Upgrade"
-	desc = "A smarter hypo synthesizer to make more complex chemicals. Made for rescue modules."
-	build_path = /obj/item/borg/upgrade/hypospray/rescue
-
-/datum/design/research/item/robot_upgrade/syndicate
+/datum/design/research/item/mechfab/robot/upgrade/syndicate
 	name = "Illegal upgrade"
-	desc = "Allows for the construction of lethal upgrades for cyborgs."
 	build_path = /obj/item/borg/upgrade/syndicate
 
-/datum/design/research/item/robot_upgrade/bigknife
-	name = "Combat Knife upgrade"
-	desc = "Allows for the construction of lethal upgrades for sec-based bots."
-	build_path = /obj/item/borg/upgrade/bigknife
-
-/datum/design/research/item/robot_upgrade/satchel_of_holding_for_borgs
-	name = "Satchel of holding equipment upgrade"
-	desc = "Allows for the construction of lethal upgrades for sec-based bots."
-	build_path = /obj/item/borg/upgrade/satchel_of_holding_for_borgs
+/datum/design/research/item/mechfab/robot/upgrade/flash_protection
+	name = "Optical Matrix Shielding"
+	build_path = /obj/item/borg/upgrade/flash_protection

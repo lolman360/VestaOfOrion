@@ -25,7 +25,6 @@ GLOBAL_LIST_EMPTY(explosion_watcher_list)
 		/obj/machinery/auto_cloner,
 		/obj/machinery/power/supermatter,
 		/obj/machinery/giga_drill,
-		/obj/mecha/working/hoverpod,
 		/obj/machinery/replicator,
 		/obj/machinery/artifact
 	)
@@ -82,7 +81,206 @@ GLOBAL_LIST_EMPTY(explosion_watcher_list)
 		/obj/item/slime_extract/rainbow = 15000
 	)
 
+// R&D tech file
+/datum/computer_file/binary/tech
+	filetype = "RDF"
+	size = 8
+	var/datum/technology/node = null
+
+/datum/computer_file/binary/tech/clone()
+	var/datum/computer_file/binary/tech/F = ..()
+	F.node = node
+	return F
+
+/datum/computer_file/binary/tech/proc/set_tech(datum/technology/new_tech)
+	node = new_tech
+	filename = sanitizeFileName(lowertext(node.name))
+
+
+// R&D research points file
+/datum/computer_file/binary/research_points
+	filetype = "RDAT"
+	size = 1 		// Scales with the amount of research points
+	var/research_id	// ID of a generated file, so you can't feed a single file into an R&D console indefinitely
+
+/datum/computer_file/binary/research_points/New(size = 1)
+	..()
+	research_id = rand(1000, 9999)
+	src.size = size
+	filename = "RESEARCH_[research_id]"
+
+/datum/computer_file/binary/research_points/clone()
+	var/datum/computer_file/binary/research_points/F = ..()
+	F.research_id = research_id
+	return F
+
+
+// Universal tool to get research points from autopsy reports, virus info reports, archeology reports, slime cores
+/obj/item/science_tool
+	name = "science tool"
+	icon_state = "science"
+	item_state = "sciencetool"
+	desc = "A hand-held device capable of extracting usefull data from various sources, such as paper reports and slime cores."
+	flags = CONDUCT
+	slot_flags = SLOT_BELT
+	throwforce = 3
+	w_class = ITEM_SIZE_SMALL
+	throw_speed = 5
+	throw_range = 10
+	matter = list(MATERIAL_STEEL = 5)
+	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 1)
+
+	var/datum/experiment_data/experiments
+	var/list/scanned_autopsy_weapons = list()
+	var/list/scanned_artifacts = list()
+	var/list/scanned_symptoms = list()
+	var/list/scanned_slimecores = list()
+	var/list/scanned_fruituid = list()
+	var/list/scanned_fruitnames = list()
+	var/list/scanned_fruitchems = list()
+	var/list/scanned_fruittraits = list()
+	var/datablocks = 0
+
+/obj/item/science_tool/Initialize()
+	. = ..()
+	experiments = new
+
+/obj/item/science_tool/attack(mob/living/M, mob/living/user)
+	if(!user.stat_check(STAT_COG, STAT_LEVEL_ADEPT))
+		to_chat(user, SPAN_WARNING("Your cognitive understanding isn't high enough to use this!"))
+		return
+
+	return
+
+/obj/item/science_tool/afterattack(obj/O, mob/living/user)
+	var/scanneddata = 0
+
+	if(istype(O,/obj/item/paper/autopsy_report))
+		var/obj/item/paper/autopsy_report/report = O
+		for(var/datum/autopsy_data/W in report.autopsy_data)
+			if(!(W.weapon in scanned_autopsy_weapons))
+				scanneddata += 1
+				scanned_autopsy_weapons += W.weapon
+
+	if(istype(O, /obj/item/paper/artifact_info))
+		var/obj/item/paper/artifact_info/report = O
+		if(report.artifact_type)
+			for(var/list/artifact in scanned_artifacts)
+				if(artifact["type"] == report.artifact_type && artifact["first_effect"] == report.artifact_first_effect && artifact["second_effect"] == report.artifact_second_effect)
+					to_chat(user, SPAN_NOTICE("[src] already has data about this artifact report"))
+					return
+
+			scanned_artifacts += list(list(
+				"type" = report.artifact_type,
+				"first_effect" = report.artifact_first_effect,
+				"second_effect" = report.artifact_second_effect,
+			))
+			scanneddata += 1
+
+	if(istype(O, /obj/item/paper/virus_report))
+		var/obj/item/paper/virus_report/report = O
+		for(var/symptom in report.symptoms)
+			if(!scanned_symptoms[symptom])
+				scanneddata += 1
+				scanned_symptoms[symptom] = report.symptoms[symptom]
+
+	if(istype(O, /obj/item/slime_extract))
+		if(!(O.type in scanned_slimecores))
+			scanned_slimecores += O.type
+			scanneddata += 1
+
+	if(istype(O, /obj/item/paper/plant_report))
+		var/obj/item/paper/plant_report/report = O
+
+		if(!report.scanned_reagents)
+			to_chat(user, SPAN_NOTICE("Can only gather research from fully grown fruit."))
+			return
+
+		var/datum/seed/P = report.scanned_seed
+
+		if(P.uid in scanned_fruituid)
+			to_chat(user, SPAN_NOTICE("[src] already has data about this fruit."))
+			return
+
+		scanned_fruituid += P.uid
+
+		if (!(P.seed_name in scanned_fruitnames))
+			scanned_fruitnames += P.seed_name
+			scanneddata += 1
+
+		for (var/datum/reagent/Q in report.scanned_reagents.reagent_list)
+			if (Q.id in scanned_fruitchems)
+				continue
+			else
+				scanned_fruitchems += Q.id
+				scanneddata += 1
+
+		if ((P.get_trait(TRAIT_HARVEST_REPEAT)) && !("TRAIT_HARVEST_REPEAT" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_HARVEST_REPEAT"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_PRODUCES_POWER)) && !("TRAIT_PRODUCES_POWER" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_PRODUCES_POWER"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_JUICY)) && !("TRAIT_JUICY" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_JUICY"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_EXPLOSIVE)) && !("TRAIT_EXPLOSIVE" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_EXPLOSIVE"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_PARASITE)) && !("TRAIT_PARASITE" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_PARASITE"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_STINGS)) && !("TRAIT_STINGS" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_STINGS"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_TELEPORTING)) && !("TRAIT_TELEPORTING" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_TELEPORTING"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_BIOLUM)) && !("TRAIT_BIOLUM" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_BIOLUM"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_CARNIVOROUS)==1) && !("TRAIT_CARNIVOROUS1" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_CARNIVOROUS1"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_CARNIVOROUS)==2) && !("TRAIT_CARNIVOROUS2" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_CARNIVOROUS2"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_SPREAD)==1) && !("TRAIT_SPREAD1" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_SPREAD1"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_SPREAD)==2) && !("TRAIT_SPREAD2" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_SPREAD2"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_ALTER_TEMP)<0) && !("TRAIT_ALTER_TEMPDOWN" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_ALTER_TEMPDOWN"
+			scanneddata += 1
+		if ((P.get_trait(TRAIT_ALTER_TEMP)>0) && !("TRAIT_ALTER_TEMPUP" in scanned_fruittraits))
+			scanned_fruittraits += "TRAIT_ALTER_TEMPUP"
+			scanneddata += 1
+
+	if(scanneddata > 0)
+		datablocks += scanneddata
+		to_chat(user, SPAN_NOTICE("[src] received [scanneddata] data block[scanneddata>1?"s":""] from scanning [O]"))
+
+	else if(istype(O, /obj/item))
+		var/science_value = experiments.get_object_research_value(O)
+		if(science_value > 0)
+			to_chat(user, SPAN_NOTICE("Estimated research value of [O.name] is [science_value]"))
+		else
+			to_chat(user, SPAN_NOTICE("[O] has no research value"))
+
+/obj/item/science_tool/proc/clear_data()
+	scanned_autopsy_weapons = list()
+	scanned_artifacts = list()
+	scanned_symptoms = list()
+	scanned_slimecores = list()
+	scanned_fruitnames = list()
+	scanned_fruitchems = list()
+	scanned_fruittraits = list()
+	datablocks = 0
+
 /*
+
 /datum/experiment_data/proc/ConvertReqString2List(list/source_list)
 	var/list/temp_list = params2list(source_list)
 	for(var/O in temp_list)
@@ -271,169 +469,6 @@ GLOBAL_LIST_EMPTY(explosion_watcher_list)
 	else
 		autosay("Detected explosion with power level [power], R&D console is missing or broken", name ,"Science")
 
-// Universal tool to get research points from autopsy reports, virus info reports, archeology reports, slime cores
-/obj/item/science_tool
-	name = "science tool"
-	icon_state = "science"
-	item_state = "sciencetool"
-	desc = "A hand-held device capable of extracting usefull data from various sources, such as paper reports and slime cores."
-	flags = CONDUCT
-	slot_flags = SLOT_BELT
-	throwforce = 3
-	w_class = ITEM_SIZE_SMALL
-	throw_speed = 5
-	throw_range = 10
-	matter = list(MATERIAL_STEEL = 5)
-	origin_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 1)
-
-	var/datum/experiment_data/experiments
-	var/list/scanned_autopsy_weapons = list()
-	var/list/scanned_artifacts = list()
-	var/list/scanned_symptoms = list()
-	var/list/scanned_slimecores = list()
-	var/list/scanned_fruituid = list()
-	var/list/scanned_fruitnames = list()
-	var/list/scanned_fruitchems = list()
-	var/list/scanned_fruittraits = list()
-	var/datablocks = 0
-
-/obj/item/science_tool/Initialize()
-	. = ..()
-	experiments = new
-
-/obj/item/science_tool/attack(mob/living/M, mob/living/user)
-	if(!user.stat_check(STAT_COG, STAT_LEVEL_ADEPT))
-		to_chat(user, SPAN_WARNING("Your cognitive understanding isn't high enough to use this!"))
-		return
-
-	return
-
-/obj/item/science_tool/afterattack(obj/O, mob/living/user)
-	var/scanneddata = 0
-
-	if(istype(O,/obj/item/paper/autopsy_report))
-		var/obj/item/paper/autopsy_report/report = O
-		for(var/datum/autopsy_data/W in report.autopsy_data)
-			if(!(W.weapon in scanned_autopsy_weapons))
-				scanneddata += 1
-				scanned_autopsy_weapons += W.weapon
-
-	if(istype(O, /obj/item/paper/artifact_info))
-		var/obj/item/paper/artifact_info/report = O
-		if(report.artifact_type)
-			for(var/list/artifact in scanned_artifacts)
-				if(artifact["type"] == report.artifact_type && artifact["first_effect"] == report.artifact_first_effect && artifact["second_effect"] == report.artifact_second_effect)
-					to_chat(user, SPAN_NOTICE("[src] already has data about this artifact report"))
-					return
-
-			scanned_artifacts += list(list(
-				"type" = report.artifact_type,
-				"first_effect" = report.artifact_first_effect,
-				"second_effect" = report.artifact_second_effect,
-			))
-			scanneddata += 1
-
-	if(istype(O, /obj/item/paper/virus_report))
-		var/obj/item/paper/virus_report/report = O
-		for(var/symptom in report.symptoms)
-			if(!scanned_symptoms[symptom])
-				scanneddata += 1
-				scanned_symptoms[symptom] = report.symptoms[symptom]
-
-	if(istype(O, /obj/item/slime_extract))
-		if(!(O.type in scanned_slimecores))
-			scanned_slimecores += O.type
-			scanneddata += 1
-
-	if(istype(O, /obj/item/paper/plant_report))
-		var/obj/item/paper/plant_report/report = O
-
-		if(!report.scanned_reagents)
-			to_chat(user, SPAN_NOTICE("Can only gather research from fully grown fruit."))
-			return
-
-		var/datum/seed/P = report.scanned_seed
-
-		if(P.uid in scanned_fruituid)
-			to_chat(user, SPAN_NOTICE("[src] already has data about this fruit."))
-			return
-
-		scanned_fruituid += P.uid
-
-		if (!(P.seed_name in scanned_fruitnames))
-			scanned_fruitnames += P.seed_name
-			scanneddata += 1
-
-		for (var/datum/reagent/Q in report.scanned_reagents.reagent_list)
-			if (Q.id in scanned_fruitchems)
-				continue
-			else
-				scanned_fruitchems += Q.id
-				scanneddata += 1
-
-		if ((P.get_trait(TRAIT_HARVEST_REPEAT)) && !("TRAIT_HARVEST_REPEAT" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_HARVEST_REPEAT"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_PRODUCES_POWER)) && !("TRAIT_PRODUCES_POWER" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_PRODUCES_POWER"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_JUICY)) && !("TRAIT_JUICY" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_JUICY"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_EXPLOSIVE)) && !("TRAIT_EXPLOSIVE" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_EXPLOSIVE"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_PARASITE)) && !("TRAIT_PARASITE" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_PARASITE"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_STINGS)) && !("TRAIT_STINGS" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_STINGS"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_TELEPORTING)) && !("TRAIT_TELEPORTING" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_TELEPORTING"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_BIOLUM)) && !("TRAIT_BIOLUM" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_BIOLUM"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_CARNIVOROUS)==1) && !("TRAIT_CARNIVOROUS1" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_CARNIVOROUS1"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_CARNIVOROUS)==2) && !("TRAIT_CARNIVOROUS2" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_CARNIVOROUS2"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_SPREAD)==1) && !("TRAIT_SPREAD1" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_SPREAD1"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_SPREAD)==2) && !("TRAIT_SPREAD2" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_SPREAD2"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_ALTER_TEMP)<0) && !("TRAIT_ALTER_TEMPDOWN" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_ALTER_TEMPDOWN"
-			scanneddata += 1
-		if ((P.get_trait(TRAIT_ALTER_TEMP)>0) && !("TRAIT_ALTER_TEMPUP" in scanned_fruittraits))
-			scanned_fruittraits += "TRAIT_ALTER_TEMPUP"
-			scanneddata += 1
-
-	if(scanneddata > 0)
-		datablocks += scanneddata
-		to_chat(user, SPAN_NOTICE("[src] received [scanneddata] data block[scanneddata>1?"s":""] from scanning [O]"))
-
-	else if(istype(O, /obj/item))
-		var/science_value = experiments.get_object_research_value(O)
-		if(science_value > 0)
-			to_chat(user, SPAN_NOTICE("Estimated research value of [O.name] is [science_value]"))
-		else
-			to_chat(user, SPAN_NOTICE("[O] has no research value"))
-
-/obj/item/science_tool/proc/clear_data()
-	scanned_autopsy_weapons = list()
-	scanned_artifacts = list()
-	scanned_symptoms = list()
-	scanned_slimecores = list()
-	scanned_fruitnames = list()
-	scanned_fruitchems = list()
-	scanned_fruittraits = list()
-	datablocks = 0
 
 
 /obj/item/computer_hardware/hard_drive/portable/research_points

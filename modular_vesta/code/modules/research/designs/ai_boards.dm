@@ -1,6 +1,6 @@
 /datum/design/research/circuit/aicore
 	name = "AI core"
-	build_path = /obj/item/circuitboard/aicore
+	build_path = /obj/item/stock_parts/circuitboard/aicore
 	sort_string = "XAAAA"
 	category = CAT_AI
 

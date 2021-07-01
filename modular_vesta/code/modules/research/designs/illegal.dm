@@ -35,7 +35,7 @@
 /datum/design/research/item/glowstick
 	name = "Glowstick"
 	desc = "A refined cocktail of all the needed things to glow in the dark!"
-	build_path = /obj/item/lighting/glowstick //Yes 1920s were a wild time
+	build_path = /obj/item/device/flashlight/flare/glowstick
 	chemicals = list("radium" = 5, "phosphorus" = 10)
 	materials = list(MATERIAL_GLASS = 2, MATERIAL_PLASTIC = 15)
 	category = CAT_MINING

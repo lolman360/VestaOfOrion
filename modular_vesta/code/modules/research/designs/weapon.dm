@@ -12,5 +12,5 @@
 /datum/design/research/item/flash
 	name = "Flash"
 	build_type = AUTOLATHE | MECHFAB
-	build_path = /obj/item/flash
+	build_path = /obj/item/device/flash
 	category = "Misc"
