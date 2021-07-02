@@ -37,11 +37,6 @@
 	build_path = /obj/item/stock_parts/circuitboard/operating
 	category = CAT_COMP
 
-/datum/design/research/circuit/scan_console
-	name = "DNA machine"
-	build_path = /obj/item/stock_parts/circuitboard/scan_consolenew
-	category = CAT_MEDI
-
 /datum/design/research/circuit/sleeper
 	name = "Sleeper"
 	build_path = /obj/item/stock_parts/circuitboard/sleeper
@@ -65,16 +60,6 @@
 /datum/design/research/circuit/mechacontrol
 	name = "exosuit control console"
 	build_path = /obj/item/stock_parts/circuitboard/mecha_control
-	category = CAT_COMP
-
-/datum/design/research/circuit/rdconsole
-	name = "R&D control console"
-	build_path = /obj/item/stock_parts/circuitboard/rdconsole
-	category = CAT_COMP
-
-/datum/design/research/circuit/aifixer
-	name = "AI integrity restorer"
-	build_path = /obj/item/stock_parts/circuitboard/aifixer
 	category = CAT_COMP
 
 /datum/design/research/circuit/comm_monitor
@@ -143,20 +128,10 @@
 	build_path = /obj/item/stock_parts/circuitboard/mech_recharger
 	category = CAT_MACHINE
 
-/datum/design/research/circuit/repair_station
-	name = "cyborg auto-repair platform"
-	build_path = /obj/item/stock_parts/circuitboard/repair_station
-	category = CAT_MACHINE
-
 /datum/design/research/circuit/recharge_station
 	name = "cyborg recharge station"
 	build_path = /obj/item/stock_parts/circuitboard/recharge_station
 	category = CAT_MACHINE
-
-/datum/design/research/circuit/recharger
-	name = "recharger"
-	build_path = /obj/item/stock_parts/circuitboard/recharger
-	category = CAT_POWER
 
 /datum/design/research/circuit/atmosalerts
 	name = "atmosphere alert console"

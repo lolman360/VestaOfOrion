@@ -94,7 +94,7 @@ GLOBAL_LIST_EMPTY(explosion_watcher_list)
 
 /datum/computer_file/binary/tech/proc/set_tech(datum/technology/new_tech)
 	node = new_tech
-	filename = sanitizeFileName(lowertext(node.name))
+	filename = lowertext(node.name)
 
 
 // R&D research points file
